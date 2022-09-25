@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo!</title>
+    <title>Estádio de E-Sports - Login</title>
+    <link type="image/x-icon" sizes="16x16" rel="shortcut icon" href="https://img.icons8.com/laces/64/000000/controller.png">
     <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 
 <body>
     <header>
         <div class="title">
-            <h1>Estadio de E-Sports</h1>
+            <h1>Estádio E-Sports</h1>
         </div>
         <div class="nav">
             <ul>
@@ -24,7 +25,7 @@
     </header>
     <section class="card-login">
         <h2>Realizar login</h2>
-        <form class="form-login">
+        <div class="form-login">
             <div class="login">
                 <label class="lbl-login" for="ipt-login">Login: </label>
                 <input id="ipt-login" name="ipt-login" type="email" placeholder="exemplo@estadio-esports.com" required>
@@ -34,9 +35,9 @@
                 <input id="ipt-senha" type="password" name="ipt-senha" placeholder="Sua senha..." required>
             </div>
             <div class="btn-actions">
-                <input class="btn-login" type="submit" value="Login" onclick="login(); return false">
+                <button id="btn-login" class="btn-login">Login</button>
             </div>
-        </form>
+        </div>
     </section>
     <section class="serviços">
 

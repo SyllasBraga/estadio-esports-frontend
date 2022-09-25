@@ -1,19 +1,9 @@
 const LOGIN = document.getElementById("ipt-login").value;
 const SENHA = document.getElementById("ipt-senha").value;
+const BTN_LOGIN = document.getElementById("btn-login");
 
-let auth = "Authorization: Basic " + btoa(LOGIN+":"+SENHA);
+function login() {
+  window.location = "./Visual/index.html";
+};
 
-(function login() {
-  console.log(auth)
-  fetch("http://localhost:8080/", {
-    mode: 'no-cors',
-    headers:{
-      auth
-    },
-  }).then(response => {
-    if (!response.ok) {
-      return response.status;
-    }
-    return response.json();
-  })
-})();
+BTN_LOGIN.addEventListener('click', login);
