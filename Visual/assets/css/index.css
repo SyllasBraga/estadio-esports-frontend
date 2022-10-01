@@ -56,7 +56,7 @@ header{
     margin-left: 10%;
 }
 
-main{
+.main{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,6 +64,17 @@ main{
     min-height: 70vh;
     margin-top: 10vh;
     background-color: #A1ADAD;
+}
+
+.main-filter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 65%;
+    min-height: 70vh;
+    margin-top: 10vh;
+    background-color: #A1ADAD;
+    filter: opacity(0.10);
 }
 
 .sec-adms{
@@ -84,6 +95,8 @@ main{
     width: 100%;
     min-height: 50vh;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .tbl-adms table{
@@ -91,7 +104,6 @@ main{
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 2.5%;
     background-color: aliceblue;
     box-shadow: 0px 0px 5px 5px aliceblue;
 }
@@ -142,4 +154,69 @@ main{
 #adms-row:hover{
     background-color: #A1ADAD;
     cursor: pointer;
+}
+
+.btn-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.btn-actions button{
+    cursor: pointer;
+    transition: 0.5s;
+    margin-right: 30%;
+    border: 1px solid white;
+}
+
+.btn-actions button:hover{
+    background-color: #A1ADAD;
+}
+
+.cad-adm{
+    display: none;
+    transition: ease-in-out 0.5;
+}
+
+.cad-adm-visible{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: right;
+    align-items: center;
+    width: 30%;
+    height: 50%;
+    background-color: #A1ADAD;
+    box-shadow: 0px 0px 5px 5px #A1ADAD;
+}
+
+.form-cad{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    margin-top: 5%;
+}
+
+.input{
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+    width: 80%;
+}
+
+.lbl{
+    display: flex;
+    text-align: left;
+}
+
+.input-text{
+    display: flex;
+    justify-content: right;
+    text-align: center;
+    margin-left: auto;
+    width: 50%;
 }

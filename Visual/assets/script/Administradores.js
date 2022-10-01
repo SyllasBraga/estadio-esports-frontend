@@ -1,4 +1,8 @@
 const table = document.getElementById("table");
+const btn_cad_adm = document.getElementById("btn-cad-adm");
+const cad_adm = document.getElementById("cad-adm");
+const cad_cancel = document.getElementById("btn-cancel");
+const main = document.getElementById("main");
 
 
 function formataData(dataAntiga) {
@@ -46,5 +50,17 @@ fetch("http://localhost:8080/administradores")
     response.json().then(data => showData(data));
   });
 
+function showCad() {
+  cad_adm.classList.add("cad-adm-visible");
+  main.classList.add("main-filter")
+}
+
+function ocultCad() {
+  cad_adm.classList.remove("cad-adm-visible");
+  main.classList.remove("main-filter")
+}
+
+btn_cad_adm.addEventListener("click", showCad);
+cad_cancel.addEventListener("click", ocultCad);
 
 
