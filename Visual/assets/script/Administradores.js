@@ -4,6 +4,38 @@ const cad_adm = document.getElementById("cad-adm");
 const cad_cancel = document.getElementById("btn-cancel");
 const main = document.getElementById("main");
 
+let administrador = JSON.stringify({
+  "cpf": "621.707.810-48",
+  "nome": "André",
+  "sobrenome": "José",
+  "dataNascimento": "2001-09-19",
+  "login": "andre@gmail.com",
+  "senha": "12345678",
+  "salario": 1999.0
+});
+
+const init_post = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: {
+    "cpf": "621.707.810-48",
+    "nome": "André",
+    "sobrenome": "José",
+    "dataNascimento": "2001-09-19",
+    "login": "andre@gmail.com",
+    "senha": "12345678",
+    "salario": 1999.0
+  } 
+}
+const post_adms = fetch("http://localhost:8080/administradores", init_post)
+.then(console.log("Foi!")).catch((erro)=>{console.log(erro);});
+
+const get_adms = fetch("http://localhost:8080/administradores")
+  .then(response => {
+    response.json().then(data => showData(data));
+  });
 
 function formataData(dataAntiga) {
   let data = new Date(dataAntiga);
@@ -44,11 +76,6 @@ const showData = (result) => {
     tr.appendChild(td);
   }
 }
-
-fetch("http://localhost:8080/administradores")
-  .then(response => {
-    response.json().then(data => showData(data));
-  });
 
 function showCad() {
   cad_adm.classList.add("cad-adm-visible");
