@@ -15,6 +15,6 @@ function login() {
      headers: { 'Authorization': 'Basic ' + btoa(`${LOGIN.value}:${SENHA.value}`) }
    })
      .then(response => response.status==200? window.location = "http://127.0.0.1:5500/Visual/" : 
-     verificaErro);
+     verificaErro());
 }
 BTN_LOGIN.addEventListener('click', login);
