@@ -71,7 +71,7 @@ header{
 
 .card-login h2{
     height: 20%;
-    margin-bottom: 20%;
+    margin-bottom: 10%;
 }
 
 .form-login{
@@ -87,9 +87,8 @@ header{
     font-size: 20px;
 }
 
-
 .login{
-    margin-bottom: 20%;
+    margin-bottom: 10%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -122,4 +121,18 @@ header{
     border: 1px solid black;
 }
 
+.erro{
+    border: 2px solid red;
+}
 
+#erro-login{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 10%;
+}
+
+#erro-login p{
+    color: red;
+}
