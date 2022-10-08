@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início</title>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link type="image/x-icon" sizes="16x16" rel="shortcut icon"
+        href="https://img.icons8.com/laces/64/000000/controller.png">
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h1>Estádio E-Sports</h1>
+        </div>
+        <div class="nav">
+            <ul>
+                <li>Início</li>
+                <li>Eventos</li>
+                <li>Jogos</li>
+                <li>Perfil</li>
+            </ul>
+        </div>
+    </header>
+    <main id="main" class="main">
+        <section class="sec-adms">
+            <div class="title-tbl">
+                <h3>Administradores cadastrados no sistema:</h3>
+            </div>
+            <div class="tbl-adms">
+                <table>
+                    <tbody id="table">
+                        <tr>
+                            <th id="nome">Nome</th>
+                            <th id="sobrenome">Sobrenome</th>
+                            <th id="cpf">Login</th>
+                            <th id="cpf">CPF</th>
+                            <th id="salario">Salário(R$)</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                        <tr id="adms-row">
+                            <td>João</td>
+                            <td>Carlos</td>
+                            <td>joão.carlos@gmail.com</td>
+                            <td>158.987.456-30</td>
+                            <td>1999</td>
+                            <td>10/01/1993</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-actions">
+                    <button id="btn-cad-adm">Cadastrar um novo administrador</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="cad-adm" id="cad-adm">
+        <h2>Realizar um novo cadastro</h2>
+        <div class="form-cad">
+            <div class="input">
+                <label class="lbl" for="name">Nome: </label>
+                <input id="new-nome" type="text" name="nome" placeholder="Nome" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="Sobrenome">Sobrenome: </label>
+                <input id="new-sobrenome" type="text" name="Sobrenome" placeholder="Sobrenome" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="login">Login: </label>
+                <input id="new-login" type="text" name="login" placeholder="exemplo@estadio-esports.com"
+                    class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="cpf">CPF: </label>
+                <input id="new-cpf" type="text" name="cpf" placeholder="123.456.789-00" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="salario">Salário(R$): </label>
+                <input id="new-salario" type="text" name="salario" placeholder="0000.00" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="datanasc">Data de nascimento: </label>
+                <input id="new-datanasc" type="date" name="datanasc" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="senha">Senha: </label>
+                <input id="new-senha" type="password" name="senha" class="input-text" placeholder="********" required>
+            </div>
+        </div>
+        <div class="btn-actions">
+            <button id="btn-cancel">Cancelar</button>
+            <button id="btn-save">Salvar</button>
+        </div>
+    </div>
+    <div class="upt-adm" id="upt-adm">
+        <h2>Atualizar um cadastro</h2>
+        <div class="form-upt">
+            <div class="input">
+                <label class="lbl" for="name">Nome: </label>
+                <input id="up-nome" type="text" name="nome" placeholder="Nome" class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="Sobrenome">Sobrenome: </label>
+                <input id="up-sobrenome" type="text" name="Sobrenome" placeholder="Sobrenome" class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="login">Login: </label>
+                <input id="up-login" type="text" name="login" placeholder="exemplo@estadio-esports.com"
+                    class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="cpf">CPF: </label>
+                <input id="up-cpf" type="text" name="cpf" placeholder="123.456.789-00" class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="salario">Salário(R$): </label>
+                <input id="up-salario" type="text" name="salario" placeholder="0000.00" class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="datanasc">Data de nascimento: </label>
+                <input id="up-datanasc" type="date" name="datanasc" class="input-text">
+            </div>
+            <div class="input">
+                <label class="lbl" for="senha">Senha: </label>
+                <input id="up-senha" type="password" name="senha" class="input-text" placeholder="********">
+            </div>
+        </div>
+        <div class="btn-actions">
+            <button id="btn-cancel-upt">Cancelar</button>
+            <button id="btn-save-upt">Salvar</button>
+        </div>
+    </div>
+    <script src="../assets/script/Administradores.js"></script>
+</body>
+
+</html>

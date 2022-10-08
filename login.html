@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estádio de E-Sports - Login</title>
+    <link type="image/x-icon" sizes="16x16" rel="shortcut icon" href="https://img.icons8.com/laces/64/000000/controller.png">
+    <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h1>Estádio E-Sports</h1>
+        </div>
+        <div class="nav">
+            <ul>
+                <li>Serviços</li>
+                <li>Sobre</li>
+                <li>Contato</li>
+            </ul>
+        </div>
+    </header>
+    <section class="card-login">
+        <h2>Realizar login</h2>
+        <div class="form-login">
+            <div class="login">
+                <label class="lbl-login" for="ipt-login">Login: </label>
+                <input id="ipt-login" name="ipt-login" type="email" placeholder="exemplo@estadio-esports.com" required>
+            </div>
+            <div class="login">
+                <label class="lbl-login" for="ipt-senha">Senha: </label>
+                <input id="ipt-senha" type="password" name="ipt-senha" placeholder="Sua senha..." required>
+            </div>
+            <div id="erro-login">
+                <p>Erro: Login ou senha incorretos</p>
+            </div>
+            <div class="btn-actions">
+                <button id="btn-login" class="btn-login">Login</button>
+            </div>
+        </div>
+    </section>
+    <section class="serviços">
+
+    </section>
+    <script src="./assets/script/login.js"></script>
+</body>
+
+</html>
