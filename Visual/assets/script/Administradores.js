@@ -1,4 +1,4 @@
-const table = document.getElementById("table");
+const table = document.getElementById("tbl-content");
 const btn_cad_adm = document.getElementById("btn-cad-adm");
 const cad_adm = document.getElementById("cad-adm");
 const cad_cancel = document.getElementById("btn-cancel");
@@ -35,21 +35,22 @@ function fazPost(administrador) {
     body: JSON.stringify(administrador)
   })
     .then("Foi!").catch((erro) => { console.log(erro); });
+    return true;
 }
 
 
-const get_adms = fetch("http://localhost:8080/administradores",
-  {
-    headers: {
-      'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+function fazGet() {
+  fetch("http://localhost:8080/administradores",
+    {
+      headers: {
+        'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+      }
     }
-  }
-)
-  .then(response => {
-    response.json().then(data => showData(data));
-  });
-
-
+  )
+    .then(response => {
+      response.json().then(data => showData(data));
+    });
+}
 function formataData(dataAntiga) {
   let data = new Date(dataAntiga);
   let dataFormatada = ((data.getDate())) + "/" +
@@ -58,9 +59,12 @@ function formataData(dataAntiga) {
 }
 
 const showData = (result) => {
+  let tbl_body = document.createElement("table");
+  tbl_body.setAttribute("id", "tbl-body");
+  table.appendChild(tbl_body);
   for (let cont = 0; cont < result.length; cont++) {
     var tr = document.createElement("tr");
-    table.appendChild(tr);
+    tbl_body.appendChild(tr);
     tr.setAttribute("id", "adms-row");
     tr.setAttribute("class", "adms-row");
     var td = document.createElement("td");
@@ -113,8 +117,15 @@ function salvaDados() {
     "senha": new_senha.value,
     "salario": new_salario.value
   }
-  ocultCad();
-  console.log(administrador);
+  if (fazPost(administrador) == true) {
+    for (let i = 0; i < linhas.length; i++) {
+      var linha = linhas[i];
+      linha.remove();
+    }
+    document.getElementById("tbl-body").remove();
+    fazGet();
+    ocultCad();
+  }
 }
 
 function showCardUpdate() {
@@ -159,6 +170,7 @@ function pegaLinha() {
   }
 }
 
+window.onload = fazGet;
 btn_cad_adm.addEventListener("click", showCad);
 cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
