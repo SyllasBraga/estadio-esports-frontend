@@ -23,36 +23,20 @@ let up_cpf = document.getElementById("up-cpf");
 let up_salario = document.getElementById("up-salario");
 let up_datanasc = document.getElementById("up-datanasc");
 let up_senha = document.getElementById("up-senha");
-var linhas = table.getElementsByTagName("tr");
+let linhas = document.getElementsByClassName("adms-row");
 
-//Ações na API
-let administrador = JSON.stringify({
-  "cpf": "621.707.810-48",
-  "nome": "André",
-  "sobrenome": "José",
-  "dataNascimento": "2001-09-19",
-  "login": "andre@gmail.com",
-  "senha": "12345678",
-  "salario": 1999.0
-});
-
-const init_post = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: {
-    "cpf": "621.707.810-48",
-    "nome": "André",
-    "sobrenome": "José",
-    "dataNascimento": "2001-09-19",
-    "login": "andre@gmail.com",
-    "senha": "12345678",
-    "salario": 1999.0
-  }
+function fazPost(administrador) {
+  fetch("http://localhost:8080/administradores", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+    },
+    body: JSON.stringify(administrador)
+  })
+    .then("Foi!").catch((erro) => { console.log(erro); });
 }
-const post_adms = fetch("http://localhost:8080/administradores", init_post)
-  .then("Foi!").catch((erro) => { console.log(erro); });
+
 
 const get_adms = fetch("http://localhost:8080/administradores",
   {
@@ -64,6 +48,7 @@ const get_adms = fetch("http://localhost:8080/administradores",
   .then(response => {
     response.json().then(data => showData(data));
   });
+
 
 function formataData(dataAntiga) {
   let data = new Date(dataAntiga);
@@ -77,6 +62,7 @@ const showData = (result) => {
     var tr = document.createElement("tr");
     table.appendChild(tr);
     tr.setAttribute("id", "adms-row");
+    tr.setAttribute("class", "adms-row");
     var td = document.createElement("td");
     tr.appendChild(td);
     var nome = document.createTextNode(result[cont].nome);
@@ -102,6 +88,7 @@ const showData = (result) => {
     var dataNasc = document.createTextNode(formataData(result[cont].dataNascimento));
     td.appendChild(dataNasc);
     tr.appendChild(td);
+    linhas[cont].addEventListener("dblclick", showCardUpdate);
   }
 }
 
@@ -131,15 +118,16 @@ function salvaDados() {
 }
 
 function showCardUpdate() {
-  pegaLinha();
+  linhas[3].classList.add("selecionado");
   card_upt_adm.classList.add("upt-adm-visible");
   main.classList.add("main-filter");
+  pegaLinha();
 }
 
 function ocultCardUpdate() {
   card_upt_adm.classList.remove("upt-adm-visible");
   main.classList.remove("main-filter");
-  linha.classList.remove("selecionado");
+  linhas[3].classList.remove("selecionado");
 
 }
 
@@ -157,11 +145,10 @@ function saveUpdate() {
   console.log(administradorAtual);
 }
 
-function pegaLinha(){
-  linha.classList.add("selecionado");
-	var selecionados = table.getElementsByClassName("selecionado");
-  for(var i = 0; i < selecionados.length; i++){
-  	var selecionado = selecionados[i];
+function pegaLinha() {
+  var selecionados = table.getElementsByClassName("selecionado");
+  for (var i = 0; i < selecionados.length; i++) {
+    var selecionado = selecionados[i];
     selecionado = selecionado.getElementsByTagName("td");
     up_nome.value = selecionado[0].innerHTML;
     up_sobrenome.value = selecionado[1].innerHTML;
@@ -177,10 +164,3 @@ cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
 cancel_upt.addEventListener("click", ocultCardUpdate);
 save_upt.addEventListener("click", saveUpdate);
-
-for(var i = 0; i < linhas.length; i++){
-	var linha = linhas[i];
-  linha.addEventListener("dblclick", showCardUpdate);
-}
-
-console.log(linhas.length)

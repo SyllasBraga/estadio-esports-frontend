@@ -31,6 +31,9 @@
                 <h3>Administradores cadastrados no sistema:</h3>
             </div>
             <div class="tbl-adms">
+                <div class="observacao">
+                    <p>Obs: Dê um clique duplo em algum dado para ver mais opções</p>
+                </div>
                 <table>
                     <tbody id="table">
                         <tr>
@@ -41,7 +44,7 @@
                             <th id="salario">Salário(R$)</th>
                             <th>Data de nascimento</th>
                         </tr>
-                        <tr id="adms-row">
+                        <tr id="adms-row" class="adms-row">
                             <td>João</td>
                             <td>Carlos</td>
                             <td>joão.carlos@gmail.com</td>
@@ -131,6 +134,9 @@
         <div class="btn-actions">
             <button id="btn-cancel-upt">Cancelar</button>
             <button id="btn-save-upt">Salvar</button>
+        </div>
+        <div class="btn-delete">
+            <button id="btn-del">Excluir</button>
         </div>
     </div>
     <script src="../assets/script/Administradores.js"></script>

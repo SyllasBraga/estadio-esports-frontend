@@ -99,6 +99,18 @@ header{
     flex-direction: column;
 }
 
+.observacao{
+    width: 80%;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+}
+
+.observacao p{
+    font-size: 13px;
+    text-align: left;
+}
+
 .tbl-adms table{
     width: 80%;
     height: 100%;
@@ -161,13 +173,19 @@ header{
     justify-content: center;
     align-items: center;
     margin-top: 5%;
+    width: 100%;
+    height: 10%;
 }
 
 .btn-actions button{
+    height: 50%;
     cursor: pointer;
     transition: 0.5s;
-    margin-right: 30%;
     border: 1px solid white;
+}
+
+.btn-actions button:nth-child(2){
+    margin-left: 30%;
 }
 
 .btn-actions button:hover{
@@ -251,3 +269,27 @@ header{
     background-color: yellow;
     filter: opacity(0.7);
   }
+
+.btn-delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    margin-top: 5%;
+}
+
+.btn-delete #btn-del{
+    background-color: red;
+    border: none;
+    color: black;
+    cursor: pointer;
+    width: 30%;
+    height: 80%;
+    transition: ease-in-out 0.5s;
+}
+
+.btn-delete #btn-del:hover{
+    background-color: white;
+    color: black;
+}
