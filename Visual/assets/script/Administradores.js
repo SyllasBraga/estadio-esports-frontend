@@ -23,7 +23,16 @@ let up_cpf = document.getElementById("up-cpf");
 let up_salario = document.getElementById("up-salario");
 let up_datanasc = document.getElementById("up-datanasc");
 let up_senha = document.getElementById("up-senha");
-let linhas = document.getElementsByClassName("adms-row");
+let linhas = document.querySelector("adms-row");
+let post_error = document.getElementById("post-error")
+let resultado;
+
+function validaDados(resultado) {
+  //if (resultado == 200) {
+  // }else{
+  post_error.style.display = "flex";
+  // }
+}
 
 function fazPost(administrador) {
   fetch("http://localhost:8080/administradores", {
@@ -33,11 +42,13 @@ function fazPost(administrador) {
       'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
     },
     body: JSON.stringify(administrador)
-  })
-    .then("Foi!").catch((erro) => { console.log(erro); });
-    return true;
+  }).then((result) => {
+    resultado = result.status;
+    return resultado;
+  }).catch((erro) => {
+    console.log(erro);
+  });
 }
-
 
 function fazGet() {
   fetch("http://localhost:8080/administradores",
@@ -92,7 +103,6 @@ const showData = (result) => {
     var dataNasc = document.createTextNode(formataData(result[cont].dataNascimento));
     td.appendChild(dataNasc);
     tr.appendChild(td);
-    linhas[cont].addEventListener("dblclick", showCardUpdate);
   }
 }
 
@@ -117,7 +127,7 @@ function salvaDados() {
     "senha": new_senha.value,
     "salario": new_salario.value
   }
-  if (fazPost(administrador) == true) {
+  if (fazPost(administrador) == 200) {
     for (let i = 0; i < linhas.length; i++) {
       var linha = linhas[i];
       linha.remove();
@@ -125,21 +135,9 @@ function salvaDados() {
     document.getElementById("tbl-body").remove();
     fazGet();
     ocultCad();
+  } else {
+    validaDados();
   }
-}
-
-function showCardUpdate() {
-  linhas[3].classList.add("selecionado");
-  card_upt_adm.classList.add("upt-adm-visible");
-  main.classList.add("main-filter");
-  pegaLinha();
-}
-
-function ocultCardUpdate() {
-  card_upt_adm.classList.remove("upt-adm-visible");
-  main.classList.remove("main-filter");
-  linhas[3].classList.remove("selecionado");
-
 }
 
 function saveUpdate() {
@@ -156,23 +154,7 @@ function saveUpdate() {
   console.log(administradorAtual);
 }
 
-function pegaLinha() {
-  var selecionados = table.getElementsByClassName("selecionado");
-  for (var i = 0; i < selecionados.length; i++) {
-    var selecionado = selecionados[i];
-    selecionado = selecionado.getElementsByTagName("td");
-    up_nome.value = selecionado[0].innerHTML;
-    up_sobrenome.value = selecionado[1].innerHTML;
-    up_login.value = selecionado[2].innerHTML;
-    up_cpf.value = selecionado[3].innerHTML;
-    up_salario.value = selecionado[4].innerHTML;
-    up_datanasc.value = selecionado[5].innerHTML;
-  }
-}
-
 window.onload = fazGet;
 btn_cad_adm.addEventListener("click", showCad);
 cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
-cancel_upt.addEventListener("click", ocultCardUpdate);
-save_upt.addEventListener("click", saveUpdate);

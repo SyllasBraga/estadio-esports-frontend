@@ -275,6 +275,15 @@ header{
     width: 50%;
 }
 
+.input-text-invalid{
+    display: flex;
+    justify-content: right;
+    text-align: center;
+    margin-left: auto;
+    width: 50%;
+    border: 2px solid red;
+}
+
 .upt-adm{
     display: none;
 }
@@ -328,4 +337,18 @@ header{
 .btn-delete #btn-del:hover{
     background-color: white;
     color: black;
+}
+
+#post-error{
+    display: none;
+    width: 100%;
+    height: 10%;
+    font-size: 14px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#post-error p{
+    color: red;
 }
