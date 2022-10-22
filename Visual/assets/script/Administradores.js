@@ -9,6 +9,10 @@ const btn_save_upt = document.getElementById("btn-save-upt");
 const upt_adm = document.getElementById("adms-row");
 const cancel_upt = document.getElementById("btn-cancel-upt");
 const save_upt = document.getElementById("btn-save-upt");
+const btn_editar = document.getElementById("btn-editar");
+const btn_sim = document.getElementById("btn-sim");
+const btn_nao = document.getElementById("btn-nao");
+const card_delete = document.getElementById("card-confirm-delete");
 let new_nome = document.getElementById("new-nome");
 let new_sobrenome = document.getElementById("new-sobrenome");
 let new_login = document.getElementById("new-login");
@@ -23,15 +27,11 @@ let up_cpf = document.getElementById("up-cpf");
 let up_salario = document.getElementById("up-salario");
 let up_datanasc = document.getElementById("up-datanasc");
 let up_senha = document.getElementById("up-senha");
-let linhas = document.querySelector("adms-row");
-let post_error = document.getElementById("post-error")
-let resultado;
+let linhas = document.getElementsByClassName("adms-row");
+let post_error = document.getElementById("post-error");
 
-function validaDados(resultado) {
-  //if (resultado == 200) {
-  // }else{
+function validaDados() {
   post_error.style.display = "flex";
-  // }
 }
 
 function fazPost(administrador) {
@@ -44,7 +44,6 @@ function fazPost(administrador) {
     body: JSON.stringify(administrador)
   }).then((result) => {
     if (result.status == 200) {
-      let linhas = document.getElementsByClassName("adms-row");
       for (let i = 0; i < linhas.length; i++) {
         var linha = linhas[i];
         linha.remove();
@@ -71,6 +70,18 @@ function fazGet() {
     .then(response => {
       response.json().then(data => showData(data));
     });
+}
+
+function fazDelete(id) {
+  fetch(`http://localhost:8080/administradores/${id}`,{
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+    }
+  }).then(result => {
+    console.log(result.status);
+  })
 }
 function formataData(dataAntiga) {
   let data = new Date(dataAntiga);
@@ -113,10 +124,29 @@ const showData = (result) => {
     var dataNasc = document.createTextNode(formataData(result[cont].dataNascimento));
     td.appendChild(dataNasc);
     tr.appendChild(td);
+    var td = document.createElement("td");
+    var btn_editar = document.createElement("button");
+    btn_editar.setAttribute("id", "btn-editar");
+    var editar = document.createTextNode("Editar");
+    btn_editar.appendChild(editar);
+    td.appendChild(btn_editar);
+    var btn_excluir = document.createElement("button");
+    btn_excluir.setAttribute("id", "btn-excluir");
+    var excluir = document.createTextNode("Excluir");
+    btn_excluir.appendChild(excluir);
+    td.appendChild(btn_excluir);
+    tr.appendChild(td);
+    btn_editar.addEventListener("click", showCadUpdate);
+    btn_excluir.addEventListener("click", function(){
+      showCadDelete();
+    });
+    btn_sim.addEventListener('click', function(){
+      fazDelete(result[cont].id);
+      ocultCadDelete();
+    });
   }
 }
 
-//Ações nas páginas
 function showCad() {
   cad_adm.classList.add("cad-adm-visible");
   main.classList.add("main-filter")
@@ -124,6 +154,26 @@ function showCad() {
 
 function ocultCad() {
   cad_adm.classList.remove("cad-adm-visible");
+  main.classList.remove("main-filter");
+}
+
+function showCadUpdate() {
+  card_upt_adm.classList.add("upt-adm-visible");
+  main.classList.add("main-filter")
+}
+
+function ocultCadUpdate() {
+  card_upt_adm.classList.remove("upt-adm-visible");
+  main.classList.remove("main-filter")
+}
+
+function showCadDelete(){
+  card_delete.classList.add("confirm-delete-visible");
+  main.classList.add("main-filter")
+}
+
+function ocultCadDelete(){
+  card_delete.classList.remove("confirm-delete-visible");
   main.classList.remove("main-filter");
 }
 
@@ -137,7 +187,7 @@ function salvaDados() {
     "senha": new_senha.value,
     "salario": new_salario.value
   }
-  fazPost(administrador)
+  fazPost(administrador);
 }
 function saveUpdate() {
   let administradorAtual = {
@@ -149,7 +199,7 @@ function saveUpdate() {
     "senha": up_senha.value,
     "salario": up_salario.value
   }
-  ocultCardUpdate();
+  ocultCadUpdate();
   console.log(administradorAtual);
 }
 
@@ -157,3 +207,5 @@ window.onload = fazGet;
 btn_cad_adm.addEventListener("click", showCad);
 cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
+cancel_upt.addEventListener("click", ocultCadUpdate);
+btn_nao.addEventListener("click", ocultCadDelete);

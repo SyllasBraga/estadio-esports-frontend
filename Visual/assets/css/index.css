@@ -103,18 +103,6 @@ header{
     flex-direction: column;
 }
 
-.observacao{
-    width: 80%;
-    display: flex;
-    justify-content: left;
-    text-align: left;
-}
-
-.observacao p{
-    font-size: 13px;
-    text-align: left;
-}
-
 .tbl-adms table{
     width: 80%;
     height: 100%;
@@ -205,7 +193,6 @@ header{
 
 #adms-row:hover{
     background-color: #A1ADAD;
-    cursor: pointer;
 }
 
 .btn-actions{
@@ -355,4 +342,73 @@ header{
 
 #post-error p{
     color: red;
+}
+
+#btn-editar{
+    cursor: pointer;
+    width: 60%;
+    background-color: yellow;
+    border: none;
+    transition: .5s ease-in-out;
+    margin-right: 10%;
+    font-weight: bold; 
+}
+
+#btn-excluir{
+    cursor: pointer;
+    width: 60%;
+    background-color: red;
+    border: none;
+    transition: .5s ease-in-out;
+    font-weight: bold; 
+}
+
+#btn-editar:hover{
+    background-color: white;
+}
+
+#btn-excluir:hover{
+    background-color: white;
+}
+
+.confirm-delete{
+    display: none;
+}
+
+.confirm-delete-visible{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 30%;
+    background-color: #A1ADAD;
+    box-shadow: 0px 0px 5px 5px #A1ADAD;
+    padding: 0;
+}
+
+.warning{
+    width: 70%;
+    display: flex;
+    text-align: center;
+}
+
+.btn-actions-delete{
+    display: flex;
+    width: 60%;
+    height: 30%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btn-actions-delete button{
+    width: 20%;
+    border: 0;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.btn-actions-delete button:hover{
+    background-color: #A1ADAD;
 }
