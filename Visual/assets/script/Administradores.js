@@ -43,8 +43,18 @@ function fazPost(administrador) {
     },
     body: JSON.stringify(administrador)
   }).then((result) => {
-    resultado = result.status;
-    return resultado;
+    if (result.status == 200) {
+      let linhas = document.getElementsByClassName("adms-row");
+      for (let i = 0; i < linhas.length; i++) {
+        var linha = linhas[i];
+        linha.remove();
+      }
+      document.getElementById("tbl-body").remove();
+      fazGet();
+      ocultCad();
+    } else {
+      validaDados();
+    }
   }).catch((erro) => {
     console.log(erro);
   });
@@ -127,19 +137,8 @@ function salvaDados() {
     "senha": new_senha.value,
     "salario": new_salario.value
   }
-  if (fazPost(administrador) == 200) {
-    for (let i = 0; i < linhas.length; i++) {
-      var linha = linhas[i];
-      linha.remove();
-    }
-    document.getElementById("tbl-body").remove();
-    fazGet();
-    ocultCad();
-  } else {
-    validaDados();
-  }
+  fazPost(administrador)
 }
-
 function saveUpdate() {
   let administradorAtual = {
     "cpf": up_cpf.value,
