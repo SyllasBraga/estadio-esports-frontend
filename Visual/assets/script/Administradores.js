@@ -150,13 +150,13 @@ const showData = (result) => {
     tr.appendChild(td);
     btn_editar.addEventListener("click", showCadUpdate);
     btn_excluir.addEventListener("click", function () {
-      createCardDelete(result[cont].id);
+      createCardDelete(result[cont].id, result[cont].nome);
       main.classList.add("main-filter");
     });
   }
 }
 
-function createCardDelete(id) {
+function createCardDelete(id, name) {
   var div_delete = document.createElement("div");
   div_delete.setAttribute("id", "card-confirm-delete");
   div_delete.setAttribute("class", "confirm-delete-visible");
@@ -165,7 +165,7 @@ function createCardDelete(id) {
   div_warning.setAttribute("class", "warning");
   div_delete.appendChild(div_warning);
   var p_warning = document.createElement("p")
-  let text = document.createTextNode("Você realmente deseja exluir o cadastro do/da")
+  let text = document.createTextNode(`Você realmente deseja exluir o cadastro do/da ${name}?`);
   p_warning.appendChild(text);
   div_warning.appendChild(p_warning);
   let div_btn_actions_delete = document.createElement("div");
