@@ -10,9 +10,11 @@ const upt_adm = document.getElementById("adms-row");
 const cancel_upt = document.getElementById("btn-cancel-upt");
 const save_upt = document.getElementById("btn-save-upt");
 const btn_editar = document.getElementById("btn-editar");
-const btn_sim = document.getElementById("btn-sim");
-const btn_nao = document.getElementById("btn-nao");
 const card_delete = document.getElementById("card-confirm-delete");
+const btn_cad_delete = document.getElementById("btn-actions-delete");
+const home = document.querySelector("body");
+const btn_ok = document.getElementById("btn-ok");
+const div_delete_error = document.getElementById("card-delete-error");
 let new_nome = document.getElementById("new-nome");
 let new_sobrenome = document.getElementById("new-sobrenome");
 let new_login = document.getElementById("new-login");
@@ -39,7 +41,7 @@ function fazPost(administrador) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+      'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
     },
     body: JSON.stringify(administrador)
   }).then((result) => {
@@ -63,7 +65,7 @@ function fazGet() {
   fetch("http://localhost:8080/administradores",
     {
       headers: {
-        'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+        'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
       }
     }
   )
@@ -73,14 +75,24 @@ function fazGet() {
 }
 
 function fazDelete(id) {
-  fetch(`http://localhost:8080/administradores/${id}`,{
+  fetch(`http://localhost:8080/administradores/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa(`pedro@estadio-esports.com:12345678`)
+      'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
     }
-  }).then(result => {
-    console.log(result.status);
+  }).then((result) => {
+    if (result.status == 200) {
+      for (let i = 0; i < linhas.length; i++) {
+        var linha = linhas[i];
+        linha.remove();
+      }
+      document.getElementById("tbl-body").remove();
+      fazGet();
+    } else {
+      main.classList.add("main-filter")
+      div_delete_error.classList.add("card-delete-error");
+    }
   })
 }
 function formataData(dataAntiga) {
@@ -137,14 +149,44 @@ const showData = (result) => {
     td.appendChild(btn_excluir);
     tr.appendChild(td);
     btn_editar.addEventListener("click", showCadUpdate);
-    btn_excluir.addEventListener("click", function(){
-      showCadDelete();
-    });
-    btn_sim.addEventListener('click', function(){
-      fazDelete(result[cont].id);
-      ocultCadDelete();
+    btn_excluir.addEventListener("click", function () {
+      createCardDelete(result[cont].id);
+      main.classList.add("main-filter");
     });
   }
+}
+
+function createCardDelete(id) {
+  var div_delete = document.createElement("div");
+  div_delete.setAttribute("id", "card-confirm-delete");
+  div_delete.setAttribute("class", "confirm-delete-visible");
+  home.appendChild(div_delete);
+  var div_warning = document.createElement("div");
+  div_warning.setAttribute("class", "warning");
+  div_delete.appendChild(div_warning);
+  var p_warning = document.createElement("p")
+  let text = document.createTextNode("Você realmente deseja exluir o cadastro do/da")
+  p_warning.appendChild(text);
+  div_warning.appendChild(p_warning);
+  let div_btn_actions_delete = document.createElement("div");
+  div_btn_actions_delete.setAttribute("class", "btn-actions-delete");
+  div_btn_actions_delete.setAttribute("id", "btn-actions-delete");
+  let btn_nao = document.createElement("button");
+  btn_nao.setAttribute("id", "btn-nao");
+  var text_nao = document.createTextNode("Não");
+  btn_nao.appendChild(text_nao);
+  btn_nao.addEventListener("click", ocultCadDelete);
+  var btn_sim = document.createElement('button');
+  var text_sim = document.createTextNode("Sim");
+  btn_sim.setAttribute("id", "btn-sim");
+  btn_sim.appendChild(text_sim);
+  btn_sim.addEventListener('click', function () {
+    fazDelete(id);
+    ocultCadDelete();
+  });
+  div_btn_actions_delete.appendChild(btn_nao);
+  div_btn_actions_delete.appendChild(btn_sim);
+  div_delete.appendChild(div_btn_actions_delete);
 }
 
 function showCad() {
@@ -167,14 +209,13 @@ function ocultCadUpdate() {
   main.classList.remove("main-filter")
 }
 
-function showCadDelete(){
-  card_delete.classList.add("confirm-delete-visible");
-  main.classList.add("main-filter")
-}
+function ocultCadDelete() {
+  var node = document.getElementById("card-confirm-delete");
+  if (node.parentNode) {
+    node.parentNode.removeChild(node);
+  }
+  main.classList.remove("main-filter")
 
-function ocultCadDelete(){
-  card_delete.classList.remove("confirm-delete-visible");
-  main.classList.remove("main-filter");
 }
 
 function salvaDados() {
@@ -208,4 +249,7 @@ btn_cad_adm.addEventListener("click", showCad);
 cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
 cancel_upt.addEventListener("click", ocultCadUpdate);
-btn_nao.addEventListener("click", ocultCadDelete);
+btn_ok.addEventListener("click", function(){
+  main.classList.remove("main-filter")
+  div_delete_error.classList.remove("card-delete-error");
+});
