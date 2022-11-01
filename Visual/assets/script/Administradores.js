@@ -95,11 +95,53 @@ function fazDelete(id) {
     }
   })
 }
+
+function fazGetById(id) {
+  fetch(`http://localhost:8080/administradores/${id}`,
+    {
+      headers: {
+        'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
+      }
+    }
+  )
+    .then(response => {
+      response.json().then(data => completeInputsUpdate(data));
+    }
+    );
+}
+
+function fazPut(id, administrador){
+  fetch(`http://localhost:8080/administradores/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
+    },
+    body: JSON.stringify(administrador)
+  }).then((result) => {
+    if (result.status == 200) {
+      for (let i = 0; i < linhas.length; i++) {
+        var linha = linhas[i];
+        linha.remove();
+      }
+      document.getElementById("tbl-body").remove();
+      fazGet();
+    } else {
+      console.log("erro");
+    }
+  })
+}
+
 function formataData(dataAntiga) {
   let data = new Date(dataAntiga);
   let dataFormatada = ((data.getDate())) + "/" +
     ((data.getMonth() + 1)) + "/" + data.getFullYear();
   return dataFormatada;
+}
+
+function formataDataInput(dataAntiga) {
+  let data = dataAntiga.slice(0, 10);
+  return data;
 }
 
 const showData = (result) => {
@@ -148,12 +190,27 @@ const showData = (result) => {
     btn_excluir.appendChild(excluir);
     td.appendChild(btn_excluir);
     tr.appendChild(td);
-    btn_editar.addEventListener("click", showCadUpdate);
+    btn_editar.addEventListener("click", function () {
+      showCadUpdate(result[cont].id);
+      save_upt.addEventListener("click", function(){
+        saveUpdate(result[cont].id);
+        console.log("o");
+      })
+    });
     btn_excluir.addEventListener("click", function () {
       createCardDelete(result[cont].id, result[cont].nome);
       main.classList.add("main-filter");
     });
   }
+}
+
+function completeInputsUpdate(adm) {
+  up_nome.value = adm.nome;
+  up_sobrenome.value = adm.sobrenome;
+  up_login.value = adm.login;
+  up_cpf.value = adm.cpf;
+  up_salario.value = adm.salario;
+  up_datanasc.value = formataDataInput(adm.dataNascimento);
 }
 
 function createCardDelete(id, name) {
@@ -199,9 +256,10 @@ function ocultCad() {
   main.classList.remove("main-filter");
 }
 
-function showCadUpdate() {
+function showCadUpdate(id) {
   card_upt_adm.classList.add("upt-adm-visible");
-  main.classList.add("main-filter")
+  main.classList.add("main-filter");
+  fazGetById(id);
 }
 
 function ocultCadUpdate() {
@@ -214,8 +272,7 @@ function ocultCadDelete() {
   if (node.parentNode) {
     node.parentNode.removeChild(node);
   }
-  main.classList.remove("main-filter")
-
+  main.classList.remove("main-filter");
 }
 
 function salvaDados() {
@@ -230,8 +287,8 @@ function salvaDados() {
   }
   fazPost(administrador);
 }
-function saveUpdate() {
-  let administradorAtual = {
+function saveUpdate(id) {
+   let administradorAtual = {
     "cpf": up_cpf.value,
     "nome": up_nome.value,
     "sobrenome": up_sobrenome.value,
@@ -241,7 +298,7 @@ function saveUpdate() {
     "salario": up_salario.value
   }
   ocultCadUpdate();
-  console.log(administradorAtual);
+  fazPut(id, administradorAtual);
 }
 
 window.onload = fazGet;
@@ -249,7 +306,7 @@ btn_cad_adm.addEventListener("click", showCad);
 cad_cancel.addEventListener("click", ocultCad);
 btn_save.addEventListener("click", salvaDados);
 cancel_upt.addEventListener("click", ocultCadUpdate);
-btn_ok.addEventListener("click", function(){
+btn_ok.addEventListener("click", function () {
   main.classList.remove("main-filter")
   div_delete_error.classList.remove("card-delete-error");
 });
