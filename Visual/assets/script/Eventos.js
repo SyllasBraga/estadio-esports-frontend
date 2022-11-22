@@ -15,20 +15,14 @@ const btn_cad_delete = document.getElementById("btn-actions-delete");
 const home = document.querySelector("body");
 const btn_ok = document.getElementById("btn-ok");
 const div_delete_error = document.getElementById("card-delete-error");
-let new_nome = document.getElementById("new-nome");
-let new_sobrenome = document.getElementById("new-sobrenome");
-let new_login = document.getElementById("new-login");
-let new_cpf = document.getElementById("new-cpf");
-let new_salario = document.getElementById("new-salario");
-let new_datanasc = document.getElementById("new-datanasc");
-let new_senha = document.getElementById("new-senha");
-let up_nome = document.getElementById("up-nome");
-let up_sobrenome = document.getElementById("up-sobrenome");
-let up_login = document.getElementById("up-login");
-let up_cpf = document.getElementById("up-cpf");
-let up_salario = document.getElementById("up-salario");
-let up_datanasc = document.getElementById("up-datanasc");
-let up_senha = document.getElementById("up-senha");
+let new_evento = document.getElementById("new-evento");
+let new_valor = document.getElementById("new-valor");
+let new_estoque = document.getElementById("new-estoque");
+let new_validade = document.getElementById("new-validade");
+let up_evento = document.getElementById("up-evento");
+let up_valor = document.getElementById("up-valor");
+let up_estoque = document.getElementById("up-estoque");
+let up_validade = document.getElementById("up-validade");
 let linhas = document.getElementsByClassName("adms-row");
 let post_error = document.getElementById("post-error");
 
@@ -62,7 +56,7 @@ function fazPost(administrador) {
 }
 
 function fazGet() {
-  fetch("http://localhost:8080/administradores",
+  fetch("http://localhost:8080/ingressos",
     {
       headers: {
         'Authorization': 'Basic ' + btoa(`joao@estadio-esports.com:12345678`)
@@ -155,28 +149,21 @@ const showData = (result) => {
     tr.setAttribute("class", "adms-row");
     var td = document.createElement("td");
     tr.appendChild(td);
-    var nome = document.createTextNode(result[cont].nome);
-    td.appendChild(nome);
+    var evento = document.createTextNode(result[cont].evento);
+    td.appendChild(evento);
     var td = document.createElement("td");
     tr.appendChild(td);
-    var sobreNome = document.createTextNode(result[cont].sobrenome);
-    td.appendChild(sobreNome);
+    var valor = document.createTextNode(result[cont].valor);
+    td.appendChild(valor);
     var td = document.createElement("td");
     tr.appendChild(td);
-    var login = document.createTextNode(result[cont].login);
-    td.appendChild(login);
+    var estoque = document.createTextNode(result[cont].estoque);
+    td.appendChild(estoque);
     var td = document.createElement("td");
     tr.appendChild(td);
-    var cpf = document.createTextNode(result[cont].cpf);
-    td.appendChild(cpf);
+    var validade = document.createTextNode(formataData(result[cont].validade));
+    td.appendChild(validade);
     var td = document.createElement("td");
-    tr.appendChild(td);
-    var salario = document.createTextNode(result[cont].salario);
-    td.appendChild(salario);
-    var td = document.createElement("td");
-    tr.appendChild(td);
-    var dataNasc = document.createTextNode(formataData(result[cont].dataNascimento));
-    td.appendChild(dataNasc);
     tr.appendChild(td);
     var td = document.createElement("td");
     var btn_editar = document.createElement("button");

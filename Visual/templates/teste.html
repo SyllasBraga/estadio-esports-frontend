@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de venda</title>
+    <script>
+        let a = 12;
+        let b = 'Jonas';
+        let c = false;
+        let d = { "nome": "Turma I3B", "dia": "terças", "qtd": 25 };
+        let e = [12, 36, 25, 36, 98, 0];
+
+        /*
+        for(let i = 0; i <e.length; i = i + 1) {
+            if (e[i] % 2 == 0) {
+                alert(e[i] + ' é par.');
+            }
+            else { 
+                alert(e[i] + ' é impar.')
+            }
+        }  
+        
+        function funcao1 () {
+            alert('faz algo');
+        }
+        
+        const funcao2 = function () {
+            alert('faz outra coisa');
+        };
+
+        const funcao3 = () => {
+            alert('faz nada');
+        };
+
+        funcao1();
+        funcao2();
+        funcao3();
+        */
+
+        
+    </script>
+    <style>
+        h1 {
+            border-top: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="h1">Título</h1>
+    <p id="p1">Algum texto para teste</p>
+    <table id ="tabela01" border ='1'>
+        <tr>
+            <th>ID</th>
+            <th>CÓDIGO</th>
+        </tr>
+    </table>
+    <button id="bt01">Botão 01</button>
+    <button id="bt02">Botão 02</button>
+</body>
+<script>
+    let cont = 1;
+
+    let bt = document.getElementById('bt01');
+    bt.addEventListener('click', () => {
+        let h = document.getElementById('h1');
+        let p = document.getElementById('p1');
+        h.innerText = 'Título novo';
+        p.innerText = 'Conteúdo novo';
+        h.style.color = 'blue';
+        h.style.borderBottom = '1px solid black';
+        h.style.borderTop = 'none';
+    });
+
+    bt02.addEventListener('click', () => {
+        let t = document.getElementById('tabela01');
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        td1.innerText = cont;
+        td2.innerText = 'Calvin Plues';
+
+        tr.append(td1);
+        tr.append(td2);
+
+        tabela01.append(tr);
+
+        cont++;
+    });
+</script>
+
+</html>

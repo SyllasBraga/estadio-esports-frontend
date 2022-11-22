@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingressos</title>
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <link type="image/x-icon" sizes="16x16" rel="shortcut icon"
+        href="https://img.icons8.com/laces/64/000000/controller.png">
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h1>Estádio E-Sports</h1>
+        </div>
+        <div class="nav">
+            <ul>
+                <li>Início</li>
+                <li>Eventos</li>
+                <li>Jogos</li>
+                <li>Perfil</li>
+            </ul>
+        </div>
+    </header>
+    <main id="main" class="main">
+        <section class="sec-adms">
+            <div class="title-tbl">
+                <h3>Ingressos cadastrados no sistema:</h3>
+            </div>
+            <div class="tbl-ing">
+                <table> 
+                    <tbody id="table">
+                        <tr>
+                            <th id="evento">Evento</th>
+                            <th id="valor">Valor</th>
+                            <th id="estoque">Estoque</th>
+                            <th id="validade">Validade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="tbl-content"></div>
+                <div class="btn-actions">
+                    <button id="btn-cad-adm">Cadastrar um novo ingresso</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="cad-adm" id="cad-adm">
+        <h2>Realizar um novo cadastro</h2>
+        <div class="form-cad">
+            <div class="input">
+                <label class="lbl" for="evento">Evento: </label>
+                <input id="new-evento" type="text" name="evento" placeholder="evento" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="valor">Valor(R$): </label>
+                <input id="new-valor" type="text" name="valor" placeholder="9,99" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="estoque">Estoque: </label>
+                <input id="new-estoque" type="text" name="estoque" placeholder="1234"
+                    class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="validade">Validade: </label>
+                <input id="new-validade" type="date" name="validade" class="input-text" required>
+            </div>
+        </div>
+        <div id="post-error">
+            <P>Erro ao realizar ao realizar cadastro:<br> Por verifique os dados digitados.</P>
+        </div>
+        <div class="btn-actions">
+            <button id="btn-cancel">Cancelar</button>
+            <button id="btn-save">Salvar</button>
+        </div>
+    </div>
+    <div class="upt-adm" id="upt-adm">
+        <h2>Atualizar um cadastro</h2>
+        <div class="form-upt">
+            <div class="input">
+                <label class="lbl" for="evento">Evento: </label>
+                <input id="up-evento" type="text" name="evento" placeholder="evento" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="valor">Valor(R$): </label>
+                <input id="up-valor" type="text" name="valor" placeholder="9,99" class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="estoque">Estoque: </label>
+                <input id="up-estoque" type="text" name="estoque" placeholder="1234"
+                    class="input-text" required>
+            </div>
+            <div class="input">
+                <label class="lbl" for="validade">Validade: </label>
+                <input id="up-validade" type="date" name="validade" class="input-text" required>
+            </div>
+        </div>
+        <div class="btn-actions">
+            <button id="btn-cancel-upt">Cancelar</button>
+            <button id="btn-save-upt">Salvar</button>
+        </div>
+    </div> 
+    <div class="card-delete-error-invisible" id="card-delete-error">
+        <div class="warning">
+            <p>Erro ao realizar exclusão: Esse administrador possui responsabilidades ativas.</p>
+        </div>
+        <button class="btn-ok" id="btn-ok">Ok</button>
+    </div>
+    <script src="../assets/script/Eventos.js"></script>
+</body>
+
+</html>

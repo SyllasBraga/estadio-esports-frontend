@@ -94,7 +94,7 @@ header{
     height: 20%;
 }
 
-.tbl-adms{
+.tbl-ing{
     display: flex;
     width: 100%;
     min-height: 50vh;
@@ -103,7 +103,7 @@ header{
     flex-direction: column;
 }
 
-.tbl-adms table{
+.tbl-ing table{
     width: 80%;
     height: 100%;
     display: flex;
@@ -113,7 +113,7 @@ header{
 }
 
 
-.tbl-adms table tr{
+.tbl-ing table tr{
     width: 100%;
     height: 2.5%;
     display: flex;
@@ -123,7 +123,7 @@ header{
     align-items: center;
 }
 
-.tbl-adms table tr th{
+.tbl-ing table tr th{
     margin-right: 0.5%;
     width: 100%;
     display: flex;
